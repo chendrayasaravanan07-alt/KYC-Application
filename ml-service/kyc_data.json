@@ -1,0 +1,32 @@
+{
+  "sessions": [
+    {
+      "record_id": "kyc_1_20251122154932",
+      "timestamp": "2025-11-22T15:49:32.359288",
+      "filename": "set.jpg",
+      "ocr_text": "Government of Incia\n\nS54) Daaem oe 7\nSETHURRISHNA RS\n\nSage peavDOB: 01/02/2006\ngow/ MALE\n\n<Tewr gs) sae. re a\n\n \n\f",
+      "extracted_details": {
+        "name": "Government of Incia",
+        "dob": "Sage peav: 01/02/2006",
+        "gender": "gow/ MALE",
+        "aadhar_number": "",
+        "address": "SETHURRISHNA RS"
+      },
+      "verification_results": {}
+    },
+    {
+      "record_id": "kyc_2_20251122155034",
+      "timestamp": "2025-11-22T15:50:34.235778",
+      "filename": "pan.jpg",
+      "ocr_text": " \n\n. we x a\n° - .\n-\n™ ¢\no\n.\nar™\n‘\n4 eee\n\nVICNI 40 “LAOD\nalk:\n\f",
+      "extracted_details": {
+        "name": ". we x a",
+        "dob": "o",
+        "gender": "alk:",
+        "aadhar_number": "",
+        "address": "ar™"
+      },
+      "verification_results": {}
+    }
+  ]
+}
