@@ -12,12 +12,13 @@ export default function App() {
     <div>
       <HomePage/>
       <Language/>
-      <KYCUpload/>
-      <FaceVerification/>
-      <AutoFillForm/>
+      {/* <KYCUpload/> */}
+      {/* <FaceVerification/>
+      <AutoFillForm/> */}
+      {/* <LoanRiskReport/> */}
       <KYCSuccess/>
       <ErrorPage/>
-      <LoanRiskReport/>
+      
     
     </div>
   );

@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 
+import KYCUpload from "./KYCUpload";
+import FaceVerification from "./FaceVerification";
+import AutoFillForm from "./AutoFillForm";
+import LoanRiskReport from "./LoanRiskReport";
+
 export default function HomePage() {
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [assistantVisible, setAssistantVisible] = useState(true);
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // 🔥 Added: step control state (NEW)
+  const [activePage, setActivePage] = useState("home");
+
+  // 🔥 Added: main home page control (NEW)
+  const [activeStep, setActiveStep] = useState("home");
 
   // Prevent black background
   useEffect(() => {
     document.body.style.margin = "0";
     document.body.style.background = "#f5f8ff";
     document.documentElement.style.margin = "0";
-
-   
-
   }, []);
 
   const speak = (text) => {
@@ -24,11 +32,10 @@ export default function HomePage() {
     msg.onstart = () => setIsSpeaking(true);
     msg.onend = () => setIsSpeaking(false);
 
-    window.speechSynthesis.cancel(); // avoid overlapping audio
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(msg);
   };
 
-  // Auto speak when assistant box appears
   useEffect(() => {
     if (assistantVisible) {
       speak(
@@ -37,7 +44,6 @@ export default function HomePage() {
     }
   }, [assistantVisible]);
 
-  // 🔥 Force auto-speech when page loads
   useEffect(() => {
     setTimeout(() => {
       speak(
@@ -48,16 +54,15 @@ export default function HomePage() {
 
   const styles = {
     page: {
-      height: "100vh",         // full screen height
+      height: "100vh",
       width: "100vw",
-      overflow: "hidden",      // 🚀 stop scrolling
+      overflow: "hidden",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       background:
         "radial-gradient(circle at top left, #e9f1ff 0%, transparent 60%), radial-gradient(circle at bottom right, #f9eaff 0%, transparent 60%), #f5f8ff",
     },
-
 
     card: {
       width: "90%",
@@ -66,7 +71,7 @@ export default function HomePage() {
       borderRadius: "18px",
       padding: "40px",
       boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-      textAlign: "center"
+      textAlign: "center",
     },
 
     headerGradient: {
@@ -77,26 +82,37 @@ export default function HomePage() {
       display: "flex",
       alignItems: "center",
       paddingLeft: "20px",
-      marginBottom: "30px"
+      marginBottom: "30px",
+    },
+
+    // 🔥 Added: nav buttons (NEW)
+    navButton: {
+      padding: "10px 16px",
+      background: "#ffffff",
+      border: "none",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontSize: "15px",
+      fontWeight: "600",
     },
 
     logo: {
       height: "55px",
-      borderRadius: "12px"
+      borderRadius: "12px",
     },
 
     title: {
       fontSize: "38px",
       fontWeight: "700",
       color: "#5a41dd",
-      marginBottom: "10px"
+      marginBottom: "10px",
     },
 
     subtitle: {
       fontSize: "17px",
       color: "#6f6f7f",
       maxWidth: "600px",
-      margin: "0 auto 40px auto"
+      margin: "0 auto 40px auto",
     },
 
     featuresRow: {
@@ -104,7 +120,7 @@ export default function HomePage() {
       gap: "20px",
       marginBottom: "40px",
       flexWrap: "wrap",
-      justifyContent: "center"
+      justifyContent: "center",
     },
 
     featureBox: {
@@ -114,7 +130,7 @@ export default function HomePage() {
       borderRadius: "14px",
       display: "flex",
       gap: "12px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.05)"
+      boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
     },
 
     fTitle: { fontWeight: "600", color: "#222" },
@@ -125,7 +141,7 @@ export default function HomePage() {
       justifyContent: "center",
       gap: "15px",
       marginBottom: "20px",
-      flexWrap: "wrap"
+      flexWrap: "wrap",
     },
 
     voiceBtn: {
@@ -135,7 +151,7 @@ export default function HomePage() {
       borderRadius: "12px",
       border: "none",
       cursor: "pointer",
-      fontWeight: "600"
+      fontWeight: "600",
     },
 
     startBtn: {
@@ -145,13 +161,13 @@ export default function HomePage() {
       borderRadius: "12px",
       border: "none",
       cursor: "pointer",
-      fontWeight: "600"
+      fontWeight: "600",
     },
 
     footer: {
       fontSize: "13px",
       color: "#999",
-      marginTop: "10px"
+      marginTop: "10px",
     },
 
     assistantBox: {
@@ -163,26 +179,26 @@ export default function HomePage() {
       boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
       borderRadius: "15px",
       padding: "15px",
-      border: "1px solid #fff"
+      border: "1px solid #fff",
     },
 
     assistantHeader: {
       display: "flex",
       justifyContent: "space-between",
-      marginBottom: "8px"
+      marginBottom: "8px",
     },
 
     assistantClose: {
       border: "none",
       background: "transparent",
       fontSize: "18px",
-      cursor: "pointer"
+      cursor: "pointer",
     },
 
     assistantBody: {
       fontSize: "14px",
       color: "#000",
-      marginBottom: "10px"
+      marginBottom: "10px",
     },
 
     assistantBtn: {
@@ -192,7 +208,7 @@ export default function HomePage() {
       borderRadius: "10px",
       background: "#000000ff",
       cursor: "pointer",
-      fontWeight: "600"
+      fontWeight: "600",
     },
 
     waveWrapper: {
@@ -200,7 +216,7 @@ export default function HomePage() {
       gap: "4px",
       height: "35px",
       alignItems: "center",
-      marginTop: "5px"
+      marginTop: "5px",
     },
 
     waveBar: (delay) => ({
@@ -209,126 +225,146 @@ export default function HomePage() {
       background: "#6a5acd",
       borderRadius: "10px",
       animation: `wave 1s ease-in-out infinite`,
-      animationDelay: `${delay}s`
-    })
+      animationDelay: `${delay}s`,
+    }),
   };
 
   return (
-    <div style={styles.page}>
-      <div style={styles.card}>
-        <div style={styles.headerGradient}>
-          <img
-            src="/mnt/data/865058eb-e2f0-46d9-8c61-db696e0e3163.png"
-            alt="logo"
-            style={styles.logo}
-          />
-        </div>
+    <>
+      {/* 🔥 CONDITIONAL RENDERING */}
+      {activePage === "kyc" && <KYCUpload />}
+      {activePage === "face" && <FaceVerification />}
+      {activePage === "autofill" && <AutoFillForm />}
+      {activePage === "loan" && <LoanRiskReport />}
 
-        <h1 style={styles.title}>AI-Driven KYC Verification</h1>
-
-        <p style={styles.subtitle}>
-          Complete your KYC verification in minutes with our intelligent AI-powered system featuring voice assistance
-        </p>
-
-        {/* Features */}
-        <div style={styles.featuresRow}>
-          <div style={{ ...styles.featureBox, background: "#eef4ff" }}>
-            <div style={{ fontSize: "24px" }}>⚡</div>
-            <div>
-              <div style={styles.fTitle}>Fast & Automated</div>
-              <div style={styles.fSub}>Complete KYC in minutes</div>
+      {/* 🔥 HOME PAGE ONLY WHEN activeStep === 'home' */}
+      {activeStep === "home" && (
+        <div style={styles.page}>
+          <div style={styles.card}>
+            <div style={styles.headerGradient}>
+              <div style={{ display: "flex", gap: "15px" }}>
+                <button style={styles.navButton} onClick={() => setActivePage("home")}>Home</button>
+                <button style={styles.navButton} onClick={() => setActivePage("kyc")}>KYC Upload</button>
+                <button style={styles.navButton} onClick={() => setActivePage("face")}>Face Verification</button>
+                <button style={styles.navButton} onClick={() => setActivePage("autofill")}>AutoFillForm</button>
+                <button style={styles.navButton} onClick={() => setActivePage("loan")}>LoanRiskReport</button>
+              </div>
             </div>
-          </div>
 
-          <div style={{ ...styles.featureBox, background: "#f8f1ff" }}>
-            <div style={{ fontSize: "24px" }}>🎤</div>
-            <div>
-              <div style={styles.fTitle}>Voice Assisted</div>
-              <div style={styles.fSub}>Hands-free guidance</div>
+            <h1 style={styles.title}>AI-Driven KYC Verification</h1>
+
+            <p style={styles.subtitle}>
+              Complete your KYC verification in minutes with our intelligent
+              AI-powered system featuring voice assistance
+            </p>
+
+            {/* Features */}
+            <div style={styles.featuresRow}>
+              <div style={{ ...styles.featureBox, background: "#eef4ff" }}>
+                <div style={{ fontSize: "24px" }}>⚡</div>
+                <div>
+                  <div style={styles.fTitle}>Fast & Automated</div>
+                  <div style={styles.fSub}>Complete KYC in minutes</div>
+                </div>
+              </div>
+
+              <div style={{ ...styles.featureBox, background: "#f8f1ff" }}>
+                <div style={{ fontSize: "24px" }}>🎤</div>
+                <div>
+                  <div style={styles.fTitle}>Voice Assisted</div>
+                  <div style={styles.fSub}>Hands-free guidance</div>
+                </div>
+              </div>
+
+              <div style={{ ...styles.featureBox, background: "#eaffea" }}>
+                <div style={{ fontSize: "24px" }}>🔒</div>
+                <div>
+                  <div style={styles.fTitle}>Secure</div>
+                  <div style={styles.fSub}>Bank-grade encryption</div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div style={{ ...styles.featureBox, background: "#eaffea" }}>
-            <div style={{ fontSize: "24px" }}>🔒</div>
-            <div>
-              <div style={styles.fTitle}>Secure</div>
-              <div style={styles.fSub}>Bank-grade encryption</div>
+            <div style={styles.actions}>
+              <button
+                style={styles.voiceBtn}
+                onClick={() => setVoiceEnabled(!voiceEnabled)}
+              >
+                🔊 {voiceEnabled ? "Voice Enabled" : "Voice Disabled"}
+              </button>
+
+              {/* 🔥 Start KYC → navigate */}
+              <button
+                style={styles.startBtn}
+                onClick={() => {
+                  speak("Starting KYC verification.");
+                  setActiveStep("kyc");
+                }}
+              >
+                Start KYC Verification
+              </button>
             </div>
-          </div>
-        </div>
 
-        <div style={styles.actions}>
-          <button
-            style={styles.voiceBtn}
-            onClick={() => setVoiceEnabled(!voiceEnabled)}
-          >
-            🔊 {voiceEnabled ? "Voice Enabled" : "Voice Disabled"}
-          </button>
-
-          <button
-            style={styles.startBtn}
-            onClick={() => speak("Starting KYC verification.")}
-          >
-            Start KYC Verification
-          </button>
-        </div>
-
-        <p style={styles.footer}>🔒 Your data is encrypted and secure.</p>
-      </div>
-
-      {/* Assistant */}
-      {assistantVisible && (
-        <div style={styles.assistantBox}>
-          <div style={styles.assistantHeader}>
-            <b>🔊 Voice Assistant</b>
-            <button
-              style={styles.assistantClose}
-              onClick={() => setAssistantVisible(false)}
-            >
-              ×
-            </button>
+            <p style={styles.footer}>🔒 Your data is encrypted and secure.</p>
           </div>
 
-          <div style={styles.assistantBody}>
-            Welcome to AI-powered KYC verification. <br />
-            Let me guide you through this process.
-          </div>
+          {/* Assistant */}
+          {assistantVisible && (
+            <div style={styles.assistantBox}>
+              <div style={styles.assistantHeader}>
+                <b>🔊 Voice Assistant</b>
+                <button
+                  style={styles.assistantClose}
+                  onClick={() => setAssistantVisible(false)}
+                >
+                  ×
+                </button>
+              </div>
 
-          {isSpeaking && (
-            <div style={styles.waveWrapper}>
-              {[0.1, 0.2, 0.3, 0.4, 0.5].map((d, i) => (
-                <div key={i} style={styles.waveBar(d)}></div>
-              ))}
+              <div style={styles.assistantBody}>
+                Welcome to AI-powered KYC verification. <br />
+                Let me guide you through this process.
+              </div>
 
-              <style>
-                {`
-                  @keyframes wave {
-                    0% { height: 10px; }
-                    50% { height: 35px; }
-                    100% { height: 10px; }
+              {isSpeaking && (
+                <div style={styles.waveWrapper}>
+                  {[0.1, 0.2, 0.3, 0.4, 0.5].map((d, i) => (
+                    <div key={i} style={styles.waveBar(d)}></div>
+                  ))}
+
+                  <style>
+                    {`
+                      @keyframes wave {
+                        0% { height: 10px; }
+                        50% { height: 35px; }
+                        100% { height: 10px; }
+                      }
+                    `}
+                  </style>
+                </div>
+              )}
+
+              <div style={{ display: "flex", gap: "6px", marginTop: "10px" }}>
+                <button
+                  style={styles.assistantBtn}
+                  onClick={() =>
+                    speak("I will guide you step by step.")
                   }
-                `}
-              </style>
+                >
+                  Speak
+                </button>
+
+                <button
+                  style={styles.assistantBtn}
+                  onClick={() => setVoiceEnabled(!voiceEnabled)}
+                >
+                  {voiceEnabled ? "Disable" : "Enable"} Voice
+                </button>
+              </div>
             </div>
           )}
-
-          <div style={{ display: "flex", gap: "6px", marginTop: "10px" }}>
-            <button
-              style={styles.assistantBtn}
-              onClick={() => speak("I will guide you step by step.")}
-            >
-              Speak
-            </button>
-
-            <button
-              style={styles.assistantBtn}
-              onClick={() => setVoiceEnabled(!voiceEnabled)}
-            >
-              {voiceEnabled ? "Disable" : "Enable"} Voice
-            </button>
-          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
