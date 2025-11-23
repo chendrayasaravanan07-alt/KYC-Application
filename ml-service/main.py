@@ -21,27 +21,27 @@ class JSONStorage:
     def __init__(self, filename: str = "kyc_data.json"):
         self.filepath = Path(filename)
         self.data = self._load_data()
+
+        # FIX: ensure "sessions" always exists
+        if "sessions" not in self.data:
+            self.data["sessions"] = []
+            self._save_data()
     
     def _load_data(self) -> Dict:
-        """Load existing data from JSON file"""
         if self.filepath.exists():
             try:
                 with open(self.filepath, 'r', encoding='utf-8') as f:
                     return json.load(f)
             except json.JSONDecodeError:
-                print(f"Warning: Could not read {self.filepath}, starting fresh")
                 return {"sessions": []}
         else:
             return {"sessions": []}
     
     def _save_data(self):
-        """Save data to JSON file"""
         with open(self.filepath, 'w', encoding='utf-8') as f:
             json.dump(self.data, f, indent=2, ensure_ascii=False)
-        print(f"Data saved to {self.filepath}")
     
     def add_ocr_record(self, filename: str, ocr_text: str, extracted_details: Dict) -> str:
-        """Add OCR record and return record ID"""
         record_id = f"kyc_{len(self.data['sessions']) + 1}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
         
         record = {
@@ -59,7 +59,6 @@ class JSONStorage:
         return record_id
     
     def add_verification_result(self, record_id: str, verification_type: str, result: Dict):
-        """Add verification result to existing record"""
         for record in self.data["sessions"]:
             if record["record_id"] == record_id:
                 record["verification_results"][verification_type] = {
@@ -72,21 +71,19 @@ class JSONStorage:
         raise ValueError(f"Record {record_id} not found")
     
     def get_record(self, record_id: str) -> Optional[Dict]:
-        """Get specific record by ID"""
         for record in self.data["sessions"]:
             if record["record_id"] == record_id:
                 return record
         return None
     
     def get_all_records(self) -> list:
-        """Get all records"""
         return self.data["sessions"]
     
     def get_latest_record(self) -> Optional[Dict]:
-        """Get the most recent record"""
         if self.data["sessions"]:
             return self.data["sessions"][-1]
         return None
+
 
 
 # Initialize FastAPI and Storage
