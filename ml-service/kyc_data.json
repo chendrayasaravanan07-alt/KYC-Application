@@ -1,32 +1,53 @@
 {
-  "sessions": [
+  "ocr_records": [
     {
-      "record_id": "kyc_1_20251122154932",
-      "timestamp": "2025-11-22T15:49:32.359288",
-      "filename": "set.jpg",
-      "ocr_text": "Government of Incia\n\nS54) Daaem oe 7\nSETHURRISHNA RS\n\nSage peavDOB: 01/02/2006\ngow/ MALE\n\n<Tewr gs) sae. re a\n\n \n\f",
+      "id": 1,
+      "filename": "dha.jpg",
+      "ocr_text": "RAPA = nnn nn nnn nn nn nnn ORR IC\nath z ANd ATA ReSoRo6\noo PARR\nRAE r Ulmhs e761 / 008 28/01/2006 RegRRS\nUY) j MB, 650! Wave a a7) See Prix\nwin g RO) CHL em aogPpena enapn@w, Ogun, Wiebe\nAR SLOG Mohe CePecra erapow Op efunjuso RAR\n- wo OOo cmmuGegeae ComteQvd yaimod autiZanpbd :\n\ni ) POOH & Stub an evCed Coligd a, UMed xm) GECER\nLe \"i Aadhaar is proof of identity, not of citizenship\npo or date of birth. It should be used with verification (online| (RR\n* authentication, or scanning of OR code / offline XML). Bee\n- 4431-6751 5590 _\ni. ANT HU, A WETMA |\n\f",
       "extracted_details": {
-        "name": "Government of Incia",
-        "dob": "Sage peav: 01/02/2006",
-        "gender": "gow/ MALE",
-        "aadhar_number": "",
-        "address": "SETHURRISHNA RS"
+        "raw_text": "RAPA = nnn nn nnn nn nn nnn ORR IC\nath z ANd ATA ReSoRo6\noo PARR\nRAE r Ulmhs e761 / 008 28/01/2006 RegRRS\nUY) j MB, 650! Wave a a7) See Prix\nwin g RO) CHL em aogPpena enapn@w, Ogun, Wiebe\nAR SLOG Mohe CePecra erapow Op efunjuso RAR\n- wo OOo cmmuGegeae ComteQvd yaimod autiZanpbd :\n\ni ) POOH & Stub an evCed Coligd a, UMed xm) GECER\nLe \"i Aadhaar is proof of identity, not of citizenship\npo or date of birth. It should be used with verification (online| (RR\n* authentication, or scanning of OR code / offline XML). Bee\n- 4431-6751 5590 _\ni. ANT HU, A WETMA |\n\f"
       },
-      "verification_results": {}
+      "timestamp": "2025-11-22T23:30:27.506105"
     },
     {
-      "record_id": "kyc_2_20251122155034",
-      "timestamp": "2025-11-22T15:50:34.235778",
-      "filename": "pan.jpg",
-      "ocr_text": " \n\n. we x a\n° - .\n-\n™ ¢\no\n.\nar™\n‘\n4 eee\n\nVICNI 40 “LAOD\nalk:\n\f",
+      "id": 2,
+      "filename": "dha.jpg",
+      "ocr_text": "RAPA = nnn nn nnn nn nn nnn ORR IC\nath z ANd ATA ReSoRo6\noo PARR\nRAE r Ulmhs e761 / 008 28/01/2006 RegRRS\nUY) j MB, 650! Wave a a7) See Prix\nwin g RO) CHL em aogPpena enapn@w, Ogun, Wiebe\nAR SLOG Mohe CePecra erapow Op efunjuso RAR\n- wo OOo cmmuGegeae ComteQvd yaimod autiZanpbd :\n\ni ) POOH & Stub an evCed Coligd a, UMed xm) GECER\nLe \"i Aadhaar is proof of identity, not of citizenship\npo or date of birth. It should be used with verification (online| (RR\n* authentication, or scanning of OR code / offline XML). Bee\n- 4431-6751 5590 _\ni. ANT HU, A WETMA |\n\f",
       "extracted_details": {
-        "name": ". we x a",
-        "dob": "o",
-        "gender": "alk:",
-        "aadhar_number": "",
-        "address": "ar™"
+        "raw_text": "RAPA = nnn nn nnn nn nn nnn ORR IC\nath z ANd ATA ReSoRo6\noo PARR\nRAE r Ulmhs e761 / 008 28/01/2006 RegRRS\nUY) j MB, 650! Wave a a7) See Prix\nwin g RO) CHL em aogPpena enapn@w, Ogun, Wiebe\nAR SLOG Mohe CePecra erapow Op efunjuso RAR\n- wo OOo cmmuGegeae ComteQvd yaimod autiZanpbd :\n\ni ) POOH & Stub an evCed Coligd a, UMed xm) GECER\nLe \"i Aadhaar is proof of identity, not of citizenship\npo or date of birth. It should be used with verification (online| (RR\n* authentication, or scanning of OR code / offline XML). Bee\n- 4431-6751 5590 _\ni. ANT HU, A WETMA |\n\f"
       },
-      "verification_results": {}
+      "timestamp": "2025-11-22T23:32:44.185877"
+    }
+  ],
+  "sessions": [
+    {
+      "record_id": "kyc_1_20251123084457",
+      "timestamp": "2025-11-23T08:44:57.427995",
+      "filename": "dha.jpg",
+      "ocr_text": "   \n    \n\nfa ,\nUma4 are 008 2801/2006 RegRERE\nMT Mow oe Cour\n\nBO Cy Sm 2 eEPOera c1aprge eaefaw\naon p Dobe CeGeora crapew Oy *hunquse\nwm Soe «abuieges Game awe hanne\nep @ eGo an avlem Ofgem Umm mm)\nAadhaar ts proof of identity, not of citizenship\n\nor date of birth. It should be used with verification (online RRs\nauthenncaton, or scanning of QR code / offline XML).\n\n4431 6751 5590\n\n   \n \n\f",
+      "extracted_details": {
+        "name": "wm Soe «abuieges Game awe hanne",
+        "dob": "aon p Dobe CeGeora crapew Oy *hunquse",
+        "gender": "ep @ eGo an avlem Ofgem Umm mm)",
+        "aadhar_number": "",
+        "address": "Uma4 are 008 2801/2006 RegRERE"
+      },
+      "verification_results": {
+        "liveness": {
+          "result": {
+            "liveness": true,
+            "EAR": 0.3773733044827463
+          },
+          "timestamp": "2025-11-23T08:50:21.809237"
+        },
+        "face_match": {
+          "result": {
+            "match": false,
+            "distance": 0.4328903861775385
+          },
+          "timestamp": "2025-11-23T08:50:59.605310"
+        }
+      }
     }
   ]
 }
