@@ -1,35 +1,21 @@
 # loan_risk.py
 
-def predict_loan_risk(features: dict):
-    """
-    Simple rule-based scoring.
-    expected features: {"monthly_income": int, "existing_liabilities": int, "credit_score": int}
-    returns risk_score (0-100) and a risk_level.
-    """
-    income = features.get("monthly_income", 0)
-    liabilities = features.get("existing_liabilities", 0)
-    credit = features.get("credit_score", 500)
+import joblib
+import numpy as np
 
-    score = 0
-    # income weight
-    if income >= 50000:
-        score += 50
-    elif income >= 30000:
-        score += 30
-    elif income >= 15000:
-        score += 15
+model_path = "risk_model.pkl"
 
-    # liabilities (lower is better)
-    if liabilities <= 5000:
-        score += 30
-    elif liabilities <= 20000:
-        score += 10
+def loan_risk_prediction(income, age, loan_amount):
+    try:
+        model = joblib.load(model_path)
 
-    # credit score
-    if credit >= 750:
-        score += 20
-    elif credit >= 650:
-        score += 10
+        features = np.array([[income, age, loan_amount]])
+        score = model.predict_proba(features)[0][1]
 
-    risk_level = "LOW" if score >= 60 else ("MEDIUM" if score >= 35 else "HIGH")
-    return {"risk_score": int(score), "risk_level": risk_level}
+        return {
+            "risk_score": float(score),
+            "risk_level": "HIGH" if score > 0.6 else "LOW"
+        }
+
+    except Exception as e:
+        return {"error": str(e)}

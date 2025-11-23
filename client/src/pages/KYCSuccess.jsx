@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function KYCSuccess() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("kycData");
-    if (saved) setData(JSON.parse(saved));
-  }, []);
+  // Sample data to display
+  const data = {
+    fullName: "Saravanan",
+    dob: "01/01/2000",
+    gender: "Male",
+    address: "123, Sample Street, City, Country",
+    idNumber: "KYC123456789",
+  };
 
   // ----------------- STYLES -----------------
   const pageStyle = {
@@ -79,22 +81,10 @@ export default function KYCSuccess() {
     marginTop: "16px",
   };
 
-  if (!data) {
-    return (
-      <div style={pageStyle}>
-        <div style={cardStyle}>
-          <h2 style={title}>No Data Found</h2>
-          <p style={subtitle}>Please complete the KYC process again.</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div style={pageStyle}>
       <div style={cardStyle}>
         <div style={successIcon}>
-          {/* Checkmark icon */}
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
             <path
               d="M5 13l4 4L19 7"
@@ -107,24 +97,23 @@ export default function KYCSuccess() {
         </div>
 
         <h1 style={title}>KYC Verified Successfully!</h1>
-        <p style={subtitle}>Your identity has been automatically verified.</p>
+        <p style={subtitle}>Your identity has been verified.</p>
 
-        {/* User Details Box */}
         <div style={box}>
           <div style={label}>Full Name</div>
-          <div>{data.fullName || "N/A"}</div>
+          <div>{data.fullName}</div>
 
           <div style={{ ...label, marginTop: "12px" }}>Date of Birth</div>
-          <div>{data.dob || "N/A"}</div>
+          <div>{data.dob}</div>
 
           <div style={{ ...label, marginTop: "12px" }}>Gender</div>
-          <div>{data.gender || "N/A"}</div>
+          <div>{data.gender}</div>
 
           <div style={{ ...label, marginTop: "12px" }}>Address</div>
-          <div>{data.address || "N/A"}</div>
+          <div>{data.address}</div>
 
           <div style={{ ...label, marginTop: "12px" }}>Document Number</div>
-          <div>{data.idNumber || "N/A"}</div>
+          <div>{data.idNumber}</div>
         </div>
 
         <button style={btn} onClick={() => alert("Proceeding to Dashboard…")}>
